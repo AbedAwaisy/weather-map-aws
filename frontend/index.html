@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Data Logger</title>
+    <!-- Link to external JavaScript file -->
+    <script src="frontend/script.js"></script>
+</head>
+<body>
+    <h1>Weather Data Logger</h1>
+
+    <!-- Input Form -->
+    <form id="locationForm">
+        <label for="locationInput">Enter location:</label>
+        <input type="text" id="locationInput" name="location" required>
+        <button type="submit">Submit</button>
+    </form>
+    <!-- Buttons -->
+    <button id="fetchDataBtn">Fetch Weather Data</button>
+    <button id="displayPredictionsBtn">Display Predictions</button>
+
+    <!-- Display Area -->
+    <div id="weatherDataDisplay">
+        <!-- Weather data and visualizations will be displayed here -->
+    </div>
+
+</body>
+</html>
