@@ -12,35 +12,61 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-    <h1>Weather Data Logger</h1>
-
-    <!-- Input Form -->
-    <form id="locationForm">
-        <label for="latitudeInput">Latitude:</label>
-        <input type="text" id="latitudeInput" name="latitude" required>
-        <label for="longitudeInput">Longitude:</label>
-        <input type="text" id="longitudeInput" name="longitude" required>
-        <button type="submit">Submit</button>
-        <button type="button" id="saveLocationBtn">Save Location</button> <!-- Save Location Button -->
-    </form>
-
-    <!-- Location List Dropdown -->
-    <label for="locationList">My Locations:</label>
-    <select id="locationList">
-        <option>My Home</option> <!-- Initial dropdown value -->
-    </select>
-
-    <!-- Buttons -->
-    <button id="fetchDataBtn">Fetch Weather Data</button>
-    <div id="map" style="height: 400px;"></div>
-    <!-- Graph Display Area -->
-    <div id="graphDisplay" class="graph-display">
-        <img src="" alt="Temperature Graph" id="temperatureGraph">
+    <div class="header">
+        <h1>Weather Data Logger</h1>
     </div>
 
-    <!-- Display Area -->
+    <!-- Input Form -->
+    <div class="form-container">
+        <form id="locationForm" class="input-form">
+            <div class="input-group">
+                <label for="latitudeInput">Latitude:</label>
+                <input type="text" id="latitudeInput" name="latitude" required>
+            </div>
+            <div class="input-group">
+                <label for="longitudeInput">Longitude:</label>
+                <input type="text" id="longitudeInput" name="longitude" required>
+            </div>
+            <div class="input-group">
+                <label for="timeRange">Select Time Range:</label>
+                <select id="timeRange">
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="next5days">Next 5 Days</option>
+                </select>
+            </div>
+            <div class="buttons">
+                <button type="submit">Submit</button>
+                <button type="button" id="saveLocationBtn">Save Location</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Location List Dropdown -->
+    <div class="dropdown-container">
+        <label for="locationList">My Locations:</label>
+        <select id="locationList">
+            <option>My Home</option>
+        </select>
+    </div>
+
+    <div id="map" style="height: 400px;"></div>
+
+    <!-- Graph Display Area -->
+    <div id="graphDisplay" class="graph-display">
+        <a href="/temperature_plot.png" target="_blank" rel="noopener noreferrer">
+            <img src="/temperature_plot.png" alt="Temperature Graph" id="temperature_plot">
+        </a>
+        <a href="/wind_plot.png" target="_blank" rel="noopener noreferrer">
+            <img src="/wind_plot.png" alt="Wind Speed and Direction Graph" id="wind_plot">
+        </a>
+        <a href="/rain_plot.png" target="_blank" rel="noopener noreferrer">
+            <img src="/rain_plot.png" alt="Rain Volume Graph" id="rain_plot">
+        </a>
+    </div>
+
+    <!-- Display Area for Weather Data -->
     <div id="weatherDataDisplay" class="weather-display">
-        <!-- Weather data will be formatted and displayed here -->
     </div>
 </body>
 </html>

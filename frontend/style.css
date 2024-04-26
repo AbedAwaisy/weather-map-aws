@@ -1,35 +1,122 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb); /* Smoother gradient background */
+    color: #333; /* Darker text for better readability */
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    color: #fff; /* Maintain white text for header for contrast */
+}
+
+.input-form {
+    background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Darker shadow for more depth */
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: bold;
+    color: #0056b3; /* Darker color for labels to improve visibility */
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #fff; /* Ensure inputs are white for visibility */
+}
+
+.buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Slight scale on hover */
+}
+
+.graph-display a {
+    margin: 10px;
+}
+
 .weather-display {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.day-container {
+    background-color: #fff;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin: 10px;
+    padding: 20px;
+    width: 100%; /* Responsive full width on all screen sizes */
+}
+
+.day-title {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #0056b3; /* Use theme color */
 }
 
 .forecast-block {
-    margin: 10px;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.forecast-date {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .forecast-icon img {
-    width: 50px;
-    height: 50px;
+    width: 60px; /* Slightly larger icons */
+    height: 60px;
+    margin-right: 10px;
 }
 
 .forecast-temp {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: #28a745; /* Use a green color for temperature to stand out */
 }
 
 .forecast-desc {
     font-size: 14px;
     color: #666;
+    flex-grow: 1; /* Allows description to take up remaining space */
+}
+
+@media (max-width: 768px) {
+    .input-form, .dropdown-container, .weather-display {
+        width: 100%;
+    }
+    .graph-display img {
+        width: 100%; /* Full width graphs on smaller screens */
+        max-height: 200px; /* Limit height to maintain aspect ratio */
+    }
 }
