@@ -4,26 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Data Logger</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="frontend/style.css">
     <!-- Link to external JavaScript file -->
-    <script src="script.js"></script>
+    <script src="frontend/script.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
     <h1>Weather Data Logger</h1>
 
     <!-- Input Form -->
     <form id="locationForm">
-        <label for="locationInput">Enter location:</label>
-        <input type="text" id="locationInput" name="location" required>
+        <label for="latitudeInput">Latitude:</label>
+        <input type="text" id="latitudeInput" name="latitude" required>
+        <label for="longitudeInput">Longitude:</label>
+        <input type="text" id="longitudeInput" name="longitude" required>
         <button type="submit">Submit</button>
+        <button type="button" id="saveLocationBtn">Save Location</button> <!-- Save Location Button -->
     </form>
+
+    <!-- Location List Dropdown -->
+    <label for="locationList">My Locations:</label>
+    <select id="locationList">
+        <option>My Home</option> <!-- Initial dropdown value -->
+    </select>
+
     <!-- Buttons -->
     <button id="fetchDataBtn">Fetch Weather Data</button>
-    <button id="displayPredictionsBtn">Display Predictions</button>
-
-    <!-- Display Area -->
-    <div id="weatherDataDisplay">
-        <!-- Weather data and visualizations will be displayed here -->
+    <div id="map" style="height: 400px;"></div>
+    <!-- Graph Display Area -->
+    <div id="graphDisplay" class="graph-display">
+        <img src="" alt="Temperature Graph" id="temperatureGraph">
     </div>
 
+    <!-- Display Area -->
+    <div id="weatherDataDisplay" class="weather-display">
+        <!-- Weather data will be formatted and displayed here -->
+    </div>
 </body>
 </html>

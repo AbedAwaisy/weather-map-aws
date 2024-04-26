@@ -1,0 +1,35 @@
+.weather-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.forecast-block {
+    margin: 10px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.forecast-date {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.forecast-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.forecast-temp {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.forecast-desc {
+    font-size: 14px;
+    color: #666;
+}
