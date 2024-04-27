@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (data.list && data.list.length) {
             let lastDisplayedDate = "";
+            let dayContainer = null;
 
             data.list.forEach(function(forecast) {
                 const forecastDateTime = new Date(forecast.dt_txt);
@@ -68,10 +69,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (forecastDate !== lastDisplayedDate) {
                     lastDisplayedDate = forecastDate;
+                    dayContainer = document.createElement('div');
+                    dayContainer.className = 'day-container';
+
                     const dateHeader = document.createElement('div');
                     dateHeader.className = 'day-title';
                     dateHeader.textContent = forecastDate;
-                    weatherDisplay.appendChild(dateHeader);
+                    dayContainer.appendChild(dateHeader);
+
+                    weatherDisplay.appendChild(dayContainer);
                 }
 
                 const block = document.createElement('div');
@@ -82,13 +88,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="forecast-temp">${temp.toFixed(1)}°C</div>
                     <div class="forecast-desc">${description}</div>
                 `;
-                weatherDisplay.appendChild(block);
+                dayContainer.appendChild(block);
             });
         } else {
             weatherDisplay.innerHTML = '<p>No weather data available.</p>';
         }
         updateGraphs(); // Update graphs after displaying weather data
     }
+
     // This function will be called when the 'Save Location' button is clicked
     function saveLocation() {
         const latitude = document.getElementById("latitudeInput").value;
@@ -168,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log('Location data received:', data);
             const locationData = JSON.parse(data.body);
             console.log('Parsed location data:', locationData);
+            populateFields(locationData.latitude, locationData.longitude, locationData.timeRange, locationData.locationName);
             fetchWeatherData(locationData.latitude, locationData.longitude, locationData.timeRange);
         })
         .catch(error => console.error('Error fetching location data:', error));
@@ -177,6 +185,21 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('fetchLocationBtn').addEventListener('click', fetchLocationData);
     // Call fetchLocations to populate the dropdown on page load
     fetchLocations();
+    function populateFields(latitude, longitude, timeRange, locationName) {
+    // Get the input fields from the DOM
+        const latitudeInput = document.getElementById('latitudeInput');
+        const longitudeInput = document.getElementById('longitudeInput');
+        const timeRangeSelect = document.getElementById('timeRange');
+        const locationNameInput = document.getElementById('locationName'); // Assuming this input exists
+
+        // Set the values of the input fields
+        latitudeInput.value = latitude;
+        longitudeInput.value = longitude;
+        timeRangeSelect.value = timeRange;
+        locationNameInput.value = locationName; // This assumes you have a field for location name
+
+        console.log(`Fields populated: Latitude=${latitude}, Longitude=${longitude}, TimeRange=${timeRange}, LocationName=${locationName}`);
+    }
 
 
 

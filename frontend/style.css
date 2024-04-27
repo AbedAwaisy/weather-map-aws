@@ -1,13 +1,13 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #a1c4fd, #c2e9fb); /* Smoother gradient background */
-    color: #333; /* Darker text for better readability */
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    color: #333;
     line-height: 1.6;
     margin: 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the content horizontally */
+    align-items: center;
 }
 
 .header {
@@ -65,56 +65,61 @@ input, select {
     height: 400px;
 }
 
+.header, .input-form, .map-container, .graph-display {
+    width: 90%; /* Center these elements and avoid full width */
+    max-width: 800px; /* Maximum width to keep elements contained */
+}
 .weather-display {
+    width: 100%; /* Allow the weather display to fill the adjusted width */
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column; /* Stack day containers vertically */
+    align-items: center;
     margin-top: 20px;
 }
 
 .day-container {
+    width: 100%; /* Full width of the weather display */
     background-color: #fff;
-    color: #333;
+    margin: 10px 0; /* Spacing between days */
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    margin: 10px;
-    padding: 20px;
-    width: calc(50% - 20px); /* Adjust width for two items per row with margin */
 }
 
 .day-title {
-    font-size: 20px;
+    width: 100%; /* Full width of the day container */
     text-align: center;
-    margin-bottom: 15px;
-    color: #0056b3; /* Use theme color */
+    font-size: 20px;
+    color: #0056b3;
+    margin-bottom: 10px; /* Space below the title */
 }
 
 .forecast-block {
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .forecast-icon img {
-    width: 60px; /* Slightly larger icons */
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-right: 10px;
 }
 
 .forecast-temp {
     font-size: 16px;
     font-weight: bold;
-    color: #28a745; /* Use a green color for temperature to stand out */
+    color: #28a745;
 }
 
 .forecast-desc {
+    flex-grow: 1;
     font-size: 14px;
     color: #666;
-    flex-grow: 1; /* Allows description to take up remaining space */
 }
 
 @media (max-width: 768px) {
