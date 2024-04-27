@@ -5,20 +5,26 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content horizontally */
 }
 
 .header {
     text-align: center;
     padding: 20px;
     color: #fff; /* Maintain white text for header for contrast */
+    width: 100%; /* Full width */
 }
 
-.input-form {
+.input-form, .map-container, .graph-display {
     background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for better readability */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Darker shadow for more depth */
     margin-bottom: 20px;
+    width: 90%; /* Adjusted width */
+    max-width: 600px; /* Maximum width */
 }
 
 .input-group {
@@ -31,7 +37,6 @@ label {
 }
 
 input, select {
-    width: 100%;
     padding: 8px;
     margin-top: 5px;
     border-radius: 5px;
@@ -55,8 +60,9 @@ input, select {
     transform: scale(1.05); /* Slight scale on hover */
 }
 
-.graph-display a {
-    margin: 10px;
+#map {
+    width: 100%; /* Full width of the container */
+    height: 400px;
 }
 
 .weather-display {
@@ -73,7 +79,7 @@ input, select {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     margin: 10px;
     padding: 20px;
-    width: 100%; /* Responsive full width on all screen sizes */
+    width: calc(50% - 20px); /* Adjust width for two items per row with margin */
 }
 
 .day-title {
@@ -112,11 +118,7 @@ input, select {
 }
 
 @media (max-width: 768px) {
-    .input-form, .dropdown-container, .weather-display {
-        width: 100%;
-    }
-    .graph-display img {
-        width: 100%; /* Full width graphs on smaller screens */
-        max-height: 200px; /* Limit height to maintain aspect ratio */
+    .input-form, .map-container, .dropdown-container, .weather-display, .day-container {
+        width: 100%; /* Full width on smaller screens for better readability */
     }
 }

@@ -28,6 +28,10 @@
                 <input type="text" id="longitudeInput" name="longitude" required>
             </div>
             <div class="input-group">
+                <label for="locationName">Location Name:</label>
+                <input type="text" id="locationName" name="locationName" placeholder="Enter a name for this location" required>
+            </div>
+            <div class="input-group">
                 <label for="timeRange">Select Time Range:</label>
                 <select id="timeRange">
                     <option value="today">Today</option>
@@ -42,12 +46,13 @@
         </form>
     </div>
 
+
     <!-- Location List Dropdown -->
     <div class="dropdown-container">
         <label for="locationList">My Locations:</label>
         <select id="locationList">
-            <option>My Home</option>
         </select>
+        <button id="fetchLocationBtn">Fetch Location Data</button>
     </div>
 
     <div id="map" style="height: 400px;"></div>

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+import boto3
+from flask import Flask, render_template, request, jsonify, send_from_directory, json
 import requests
 import matplotlib  # Ensure this is at the top
 matplotlib.use('Agg')  # Set the backend before importing pyplot
@@ -108,6 +109,71 @@ def wind_plot():
 def rain_plot():
     return send_from_directory('static', 'rain_plot.png')
 
+@app.route('/save_location', methods=['POST'])
+def save_location():
+    data = request.get_json()
+    print("Received location data:", data)
+
+    # Create a boto3 client for the Lambda service
+    lambda_client = boto3.client('lambda')
+    save_location_to_text(data['locationName'])
+    try:
+        # Invoking the Lambda function
+        response = lambda_client.invoke(
+            FunctionName='SaveWeatherLocation',  # Replace with your Lambda function name
+            InvocationType='RequestResponse',
+            Payload=json.dumps(data)  # Convert the dictionary to a JSON string
+        )
+        # Read the response from Lambda
+        response_payload = response['Payload'].read()
+        return jsonify(json.loads(response_payload)), response['StatusCode']
+    except Exception as e:
+        print(f"Error invoking Lambda function: {str(e)}")
+        return jsonify({"message": "Failed to invoke Lambda function"}), 500
+
+def save_location_to_text(location_name):
+    # Specify the path to your file
+    file_path = 'locations.txt'
+    try:
+        # Open the file in append mode
+        with open(file_path, 'a') as file:
+            # Write the location name followed by a newline
+            file.write(location_name + '\n')
+    except Exception as e:
+        print(f"Failed to save location to text file: {str(e)}")
+
+@app.route('/get_locations', methods=['GET'])
+def get_locations():
+    file_path = 'locations.txt'
+    try:
+        with open(file_path, 'r') as file:
+            locations = file.readlines()
+        # Remove newline characters
+        locations = [location.strip() for location in locations]
+        return jsonify(locations)
+    except FileNotFoundError:
+        return jsonify([]), 200
+
+@app.route('/get_location_data', methods=['POST'])
+def get_location_data():
+    data = request.get_json()
+    location_name = data.get('locationName')
+
+    # Assume lambda_client is already defined and configured
+    try:
+        # Invoking the Lambda function to get data for a specific location
+        lambda_client = boto3.client('lambda')
+
+        response = lambda_client.invoke(
+            FunctionName='FetchWeatherLocationData',
+            InvocationType='RequestResponse',
+            Payload=json.dumps({'locationName': location_name})
+        )
+        response_payload = json.loads(response['Payload'].read())
+        return jsonify(response_payload), 200
+    except Exception as e:
+        print(f"Error invoking Lambda function: {str(e)}")
+        return jsonify({"message": "Failed to retrieve location data"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

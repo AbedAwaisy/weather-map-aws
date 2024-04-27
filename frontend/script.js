@@ -89,12 +89,103 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         updateGraphs(); // Update graphs after displaying weather data
     }
+    // This function will be called when the 'Save Location' button is clicked
+    function saveLocation() {
+        const latitude = document.getElementById("latitudeInput").value;
+        const longitude = document.getElementById("longitudeInput").value;
+        const locationName = document.getElementById("locationName").value;
+        const timeRange = document.getElementById("timeRange").value;
+
+        if (!latitude || !longitude || !locationName) {
+            alert("Please ensure all fields are filled out correctly.");
+            return;
+        }
+
+        // Prepare data to be sent to the backend
+        const locationData = {
+            latitude,
+            longitude,
+            locationName,
+            timeRange
+        };
+
+        // Send data to the backend using POST request
+        fetch('/save_location', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(locationData)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok.');
+            return response.json();
+        })
+        .then(data => {
+            console.log("Location saved successfully:", data);
+            alert("Location saved successfully!");
+        })
+        .catch(error => {
+            console.error('Error saving location:', error);
+            alert(`Failed to save location: ${error.message}`);
+        });
+    }
+
+    function fetchLocations() {
+        fetch('/get_locations')
+        .then(response => response.json())
+        .then(locations => {
+            const select = document.getElementById('locationList');
+            // Clear existing options, remove this line if you want to keep the 'My Home' option
+            select.innerHTML = '';
+            locations.forEach(location => {
+                const option = document.createElement('option');
+                option.value = location;
+                option.textContent = location;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching locations:', error));
+    }
+    // Function to handle fetching location data
+    function fetchLocationData() {
+        const locationName = document.getElementById('locationList').value;
+        if (!locationName) {
+            alert('Please select a location.');
+            return;
+        }
+
+        // Send the request to the backend with the selected location name
+        fetch('/get_location_data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ locationName: locationName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Location data received:', data);
+            const locationData = JSON.parse(data.body);
+            console.log('Parsed location data:', locationData);
+            fetchWeatherData(locationData.latitude, locationData.longitude, locationData.timeRange);
+        })
+        .catch(error => console.error('Error fetching location data:', error));
+    }
+
+    // Event listener for the Fetch Location button
+    document.getElementById('fetchLocationBtn').addEventListener('click', fetchLocationData);
+    // Call fetchLocations to populate the dropdown on page load
+    fetchLocations();
+
 
 
     map.on('click', function(e) {
         document.getElementById("latitudeInput").value = e.latlng.lat.toFixed(4);
         document.getElementById("longitudeInput").value = e.latlng.lng.toFixed(4);
     });
+    document.getElementById('saveLocationBtn').addEventListener('click', saveLocation);
+
 
     document.getElementById("locationForm").addEventListener("submit", function(event) {
         event.preventDefault();
