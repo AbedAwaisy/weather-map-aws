@@ -10,7 +10,7 @@ Weather Data Logger is a web application that displays and logs weather data for
 - **AWS DynamoDB:** Used to store location data persistently.
 - **IAM Configuration:** Proper IAM roles are configured for secure AWS service access.
 - **boto3:** Python library used for interfacing with AWS services.
-- **OpenWeatherMap API:** Fetches real-time weather data.
+- **OpenWeatherMap API:** Fetches real-time weather data.(Free Tier only allows 5-day-forecast 3-hour-timestamps starting from current time)
 
 ## Setup Instructions
 
@@ -72,8 +72,19 @@ Navigate to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your web browser
 - **Save Locations:** Enter a location name and click 'Save Location' to store it in AWS DynamoDB.
 - **Fetch Saved Locations:** Use the dropdown to select a saved location and view its stored data.
 - **View Graphs:** Click on graphs to view them in full size in new tab.
-### ![Weather App Screenshots](https://imgur.com/a/osFpAaS)
 
+Simple use case:
+- Navigate the interactive map and click anywhere, You will see coordinates of the location you clicked will be automatically inserted in the relevant fields.
+- ### ![Weather App Screenshots](static/web1.png)
+- Fill Location name.
+- Choose Time Range
+- Click Submit
+- Scroll down to see results of 3-hour seperated forecast starting from your current time and until time range you specified.
+- Three Graphs of Temperature, Wind Speed and Rain Volume.
+- ![Weather App Screenshots](static/web2.png)
+- 3-Hour-Seperated forecast for each day in the range you specified.
+- ![Weather App Screenshots](static/web3.png)
+- You can click save location, refresh web page, and see your new location added to the drop-down list (saved as long/latitude), by choosing a location from drop-down list, the coordinations and time range you save for that location will populate the form fields and you can submit again to view forecast for this location at different times easily.
 ## API Testing with Postman
 
 To test the API functionality, you can set up Postman:
