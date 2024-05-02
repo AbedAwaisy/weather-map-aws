@@ -72,6 +72,7 @@ Navigate to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in your web browser
 - **Save Locations:** Enter a location name and click 'Save Location' to store it in AWS DynamoDB.
 - **Fetch Saved Locations:** Use the dropdown to select a saved location and view its stored data.
 - **View Graphs:** Click on graphs to view them in full size in new tab.
+### ![Weather App Screenshots](https://imgur.com/a/osFpAaS)
 
 ## API Testing with Postman
 
