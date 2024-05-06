@@ -1,4 +1,6 @@
 import requests
+import matplotlib  # Ensure this is at the top
+matplotlib.use('Agg')  # Set the backend before importing pyplot
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from config import API_KEY
